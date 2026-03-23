@@ -1,0 +1,38 @@
+{
+  "hivemind": {
+    "enabled": true,
+    "memory_path": "~/.nanobot/hivemind_memory.db",
+    "message_bus": {
+      "max_queue_size": 1000,
+      "message_timeout": 30
+    },
+    "nodes": {
+      "wizard": {
+        "enabled": true,
+        "reflection_interval": 300,
+        "evolution_threshold": 10
+      },
+      "mother": {
+        "enabled": true,
+        "max_swarm_size": 20,
+        "load_balance_interval": 60
+      },
+      "librarian": {
+        "enabled": true,
+        "extraction_interval": 600,
+        "knowledge_levels": ["draft", "verified", "production"]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "~/.nanobot/hivemind_workspace",
+      "model": "kimi-k2p5"
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": false
+    }
+  }
+}
