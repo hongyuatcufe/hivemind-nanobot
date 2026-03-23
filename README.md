@@ -1,43 +1,45 @@
 # HiveMind-nanobot
 
-> 轻量级多 Agent 进化系统 - 基于 [nanobot](https://github.com/HKUDS/nanobot) 的三层母节点架构
+> Lightweight Multi-Agent Evolution System - Three-Layer Mother Node Architecture built on [nanobot](https://github.com/HKUDS/nanobot)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Status: Prototype](https://img.shields.io/badge/Status-Prototype-yellow.svg)]()
 
----
-
-## 📖 项目简介
-
-HiveMind-nanobot 是一个轻量级的多 Agent 进化系统，**基于 [nanobot](https://github.com/HKUDS/nanobot) 框架**（~4,000行）构建。我们在保留 nanobot 的轻量特性、40+ 渠道集成和 ClawHub Skill 生态的基础上，引入**三层母节点协作架构**，实现 Agent 的自我进化与知识积累。
-
-**设计理念**: 不是替代 nanobot，而是在其之上添加进化能力 —— 让 nanobot 从"单 Agent 框架"进化为"会自己设计和管理多 Agent 的系统"。
-
-### 核心特性
-
-- 🧠 **三层母节点**: Wizard（个体进化）、Mother（群体进化）、Librarian（知识进化）
-- 🔄 **消息总线**: 节点间异步通信，解耦设计
-- 💾 **共享记忆**: SQLite 持久化存储，支持经验积累与知识分级
-- 🐝 **蜂群管理**: 动态创建与管理子 Agent
-- 🌱 **进化机制**: 从失败中学习，持续优化策略
+**Language**: [English](README.md) | [简体中文](README-zh.md)
 
 ---
 
-## 🏗️ 架构设计
+## 📖 Introduction
 
-### 三层母节点
+HiveMind-nanobot is a lightweight multi-agent evolution system **built on top of [nanobot](https://github.com/HKUDS/nanobot)** (~4,000 lines). While preserving nanobot's lightweight nature, 40+ channel integrations, and ClawHub Skill ecosystem, we introduce a **three-layer mother node architecture** to enable agent self-evolution and knowledge accumulation.
+
+**Design Philosophy**: Not to replace nanobot, but to add evolutionary capabilities on top of it — transforming nanobot from a "single-agent framework" into a "system that designs and manages multi-agent swarms autonomously."
+
+### Core Features
+
+- 🧠 **Three-Layer Mother Nodes**: Wizard (individual evolution), Mother (swarm evolution), Librarian (knowledge evolution)
+- 🔄 **Message Bus**: Asynchronous inter-node communication with decoupled design
+- 💾 **Shared Memory**: SQLite-based persistence for experience accumulation and knowledge stratification
+- 🐝 **Swarm Management**: Dynamic creation and orchestration of sub-agents
+- 🌱 **Evolution Mechanism**: Learn from failures and continuously optimize strategies
+
+---
+
+## 🏗️ Architecture
+
+### Three-Layer Mother Nodes
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    三层母节点层                           │
+│              Three-Layer Mother Node                     │
 │                                                         │
 │   ┌──────────┐    ┌──────────┐    ┌──────────┐        │
 │   │  Wizard  │◄──►│  Mother  │◄──►│ Librarian│        │
-│   │  节点    │    │  节点    │    │  节点    │        │
+│   │   Node   │    │   Node   │    │   Node   │        │
 │   │          │    │          │    │          │        │
-│   │•自我反思  │    │•创生子体  │    │•经验提取  │        │
-│   │•策略优化  │    │•蜂群管理  │    │•知识进化  │        │
-│   │•能力进化  │    │•结构调整  │    │•模式识别  │        │
+│   │•Reflect  │    │•Spawn    │    │•Extract  │        │
+│   │•Optimize │    │•Manage   │    │•Evolve   │        │
+│   │•Evolve   │    │•Balance  │    │•Recognize│        │
 │   └────┬─────┘    └────┬─────┘    └──────────┘        │
 │        │               │                               │
 │        └───────────────┘                               │
@@ -46,7 +48,7 @@ HiveMind-nanobot 是一个轻量级的多 Agent 进化系统，**基于 [nanobot
 └──────────────────┴──────────────────────────────────────┘
                    │
 ┌──────────────────┴──────────────────────────────────────┐
-│                    蜂群执行层                             │
+│                 Worker Swarm Layer                       │
 │   ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐     │
 │   │ Coder   │ │ Writer  │ │ Searcher│ │ Reviewer│     │
 │   │Subagent │ │Subagent │ │Subagent │ │Subagent │     │
@@ -54,120 +56,120 @@ HiveMind-nanobot 是一个轻量级的多 Agent 进化系统，**基于 [nanobot
 └─────────────────────────────────────────────────────────┘
 ```
 
-### 节点职责
+### Node Responsibilities
 
-| 节点 | 职责 | 输入 | 输出 |
-|------|------|------|------|
-| **Wizard** | 个体进化：自我反思、策略优化 | 决策历史、Librarian知识 | 策略更新、复制请求 |
-| **Mother** | 群体进化：蜂群管理、负载均衡 | 任务请求、Wizard请求 | Agent创建/终止指令 |
-| **Librarian** | 知识进化：经验提炼、模式识别 | 蜂群执行记录 | 知识insights、优化建议 |
-
----
-
-## 📊 当前状态
-
-**阶段**: 概念验证原型（Prototype）
-
-✅ **已完成**:
-- 三层节点基础架构
-- 消息总线通信机制
-- 共享记忆（SQLite）
-- 基础健康监控
-
-⚠️ **原型局限**:
-- ❌ 子 Agent 创建是空壳（未桥接 nanobot API）
-- ❌ 进化机制缺少 LLM 驱动（仅简单计数）
-- ❌ 无动态任务图生成能力
-- ❌ 知识提炼无深度分析
-
-详见: [技术方案文档](docs/HIVEMIND_NANOBOT_TECH_SPEC.md)
+| Node | Responsibility | Input | Output |
+|------|----------------|-------|--------|
+| **Wizard** | Individual evolution: self-reflection, strategy optimization | Decision history, Librarian knowledge | Strategy updates, replication requests |
+| **Mother** | Swarm evolution: agent orchestration, load balancing | Task requests, Wizard requests | Agent creation/termination commands |
+| **Librarian** | Knowledge evolution: experience extraction, pattern recognition | Worker execution records | Knowledge insights, optimization suggestions |
 
 ---
 
-## 🎯 改进路线图
+## 📊 Current Status
 
-### 设计灵感来源
+**Stage**: Proof-of-Concept Prototype
 
-本项目站在两个优秀开源项目的肩膀上：
+✅ **Completed**:
+- Three-layer node infrastructure
+- Message bus communication mechanism
+- Shared memory (SQLite)
+- Basic health monitoring
 
-#### 基座框架：nanobot
+⚠️ **Prototype Limitations**:
+- ❌ Subagent creation is a stub (not bridged to nanobot API)
+- ❌ Evolution mechanism lacks LLM-driven analysis (simple counting only)
+- ❌ No dynamic task graph generation
+- ❌ Knowledge extraction lacks deep analysis
 
-> **致谢**: 特别感谢 [HKUDS](https://github.com/HKUDS) 团队开源的 [nanobot](https://github.com/HKUDS/nanobot) 框架。nanobot 提供了轻量级（~4,000行）、高可扩展的 Agent 基础设施，支持 40+ 通信渠道和丰富的 ClawHub Skill 生态。我们的三层母节点架构正是在 nanobot 的基础上扩展而来，复用了其消息总线、subagent 管理、渠道集成等核心能力。
-
-**从 nanobot 继承的核心能力**：
-- 40+ 渠道集成（Telegram, Discord, 飞书等）
-- ClawHub Skill 生态（浏览器控制、文件操作、API 调用）
-- 轻量级架构设计（易部署、低资源占用）
-- Subagent 生命周期管理
-
-#### 进化方向参考：Hive
-
-> **致谢**: 特别感谢 [Aden](https://github.com/aden-hive) 团队开源的 [Hive](https://github.com/aden-hive/hive) 框架。Hive 是企业级的 AI Agent 生产框架，其对话式 Agent 设计、动态图生成、自适应进化等核心理念为我们的改进方向提供了宝贵的启发。
-
-**借鉴 Hive 的核心设计**（详见 [深度对比分析](docs/DEEP_ANALYSIS_HIVE_VS_HIVEMIND.md)）：
-1. **对话式 Agent 设计流程**（来自 Hive Queen 节点）
-2. **LLM 驱动的失败分析与进化**（来自 Hive 自适应机制）
-3. **动态任务图生成**（来自 Hive GraphExecutor）
-
-### Phase 1: 核心能力补齐（2周 - MVP）
-
-**目标**: 让系统能真正创建并运行 subagent
-
-- [x] 实现消息总线与共享记忆
-- [ ] 桥接 nanobot `sessions_spawn` API
-- [ ] Mother 节点的对话式设计流程（3-6轮需求澄清）
-- [ ] Librarian 的 LLM 驱动失败分析
-
-**参考**: Hive 的 `queen_lifecycle_tools.py` 和 `worker_memory.py`
-
-### Phase 2: 简化版 Graph 系统（2周）
-
-**目标**: 支持任务拆解成 3-5 个子节点
-
-- [ ] `TaskGraph` 数据结构（简化版，非完整溶解机制）
-- [ ] 任务拆解执行器
-- [ ] 节点间数据流传递
-
-**参考**: Hive 的 `executor.py` 和 `NodeSpec` 设计
-
-### Phase 3: 进化机制完善（2周）
-
-**目标**: 从失败中真正学习并改进
-
-- [ ] 失败自动诊断与改进建议
-- [ ] 知识 A/B 测试与升级机制
-- [ ] 策略动态调整
-
-**参考**: Hive 的 `replan_agent()` 和 digest 生成机制
-
-### Phase 4: 可观测性（1周）
-
-- [ ] 健康监控（stall/doom loop detection）
-- [ ] 运行摘要自动生成
-- [ ] EventBus 增强
-
-**参考**: Hive 的 `HealthMonitor` 和事件系统
+See: [Technical Specification](docs/HIVEMIND_NANOBOT_TECH_SPEC.md) (Chinese)
 
 ---
 
-## 🚀 快速开始
+## 🎯 Roadmap
 
-### 安装依赖
+### Design Inspirations
+
+This project stands on the shoulders of two excellent open-source projects:
+
+#### Foundation: nanobot
+
+> **Acknowledgment**: Special thanks to the [HKUDS](https://github.com/HKUDS) team for open-sourcing [nanobot](https://github.com/HKUDS/nanobot). nanobot provides a lightweight (~4,000 lines), highly extensible agent infrastructure with 40+ communication channels and a rich ClawHub Skill ecosystem. Our three-layer mother node architecture is built as an extension on top of nanobot, reusing its message bus, subagent management, channel integrations, and other core capabilities.
+
+**Core capabilities inherited from nanobot**:
+- 40+ channel integrations (Telegram, Discord, Feishu, etc.)
+- ClawHub Skill ecosystem (browser control, file operations, API calls)
+- Lightweight architecture design (easy deployment, low resource footprint)
+- Subagent lifecycle management
+
+#### Evolution Roadmap: Hive
+
+> **Acknowledgment**: Special thanks to the [Aden](https://github.com/aden-hive) team for open-sourcing [Hive](https://github.com/aden-hive/hive). Hive is an enterprise-grade AI agent production framework, and its core concepts — conversational agent design, dynamic graph generation, adaptive evolution — have provided invaluable inspiration for our improvement roadmap.
+
+**Key designs borrowed from Hive** (see [Deep Comparison Analysis](docs/DEEP_ANALYSIS_HIVE_VS_HIVEMIND.md) - Chinese):
+1. **Conversational agent design workflow** (from Hive's Queen node)
+2. **LLM-driven failure analysis and evolution** (from Hive's adaptive mechanism)
+3. **Dynamic task graph generation** (from Hive's GraphExecutor)
+
+### Phase 1: Core Capability Gap (2 weeks - MVP)
+
+**Goal**: Enable real subagent creation and execution
+
+- [x] Message bus and shared memory
+- [ ] Bridge to nanobot `sessions_spawn` API
+- [ ] Conversational design workflow in Mother node (3-6 turn requirements clarification)
+- [ ] LLM-driven failure analysis in Librarian
+
+**Reference**: Hive's `queen_lifecycle_tools.py` and `worker_memory.py`
+
+### Phase 2: Simplified Graph System (2 weeks)
+
+**Goal**: Support task decomposition into 3-5 sub-nodes
+
+- [ ] `TaskGraph` data structure (simplified, no full dissolution mechanism)
+- [ ] Task decomposition executor
+- [ ] Inter-node data flow
+
+**Reference**: Hive's `executor.py` and `NodeSpec` design
+
+### Phase 3: Evolution Mechanism (2 weeks)
+
+**Goal**: Truly learn from failures and improve
+
+- [ ] Automatic failure diagnosis and improvement suggestions
+- [ ] Knowledge A/B testing and promotion mechanism
+- [ ] Dynamic strategy adjustment
+
+**Reference**: Hive's `replan_agent()` and digest generation mechanism
+
+### Phase 4: Observability (1 week)
+
+- [ ] Health monitoring (stall/doom loop detection)
+- [ ] Auto-generated run summaries
+- [ ] EventBus enhancements
+
+**Reference**: Hive's `HealthMonitor` and event system
+
+---
+
+## 🚀 Quick Start
+
+### Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 运行示例
+### Run Example
 
 ```bash
-# 基础示例：启动 HiveMind 并演示三层节点协作
+# Basic example: Start HiveMind and demonstrate three-layer node collaboration
 python examples/basic_hivemind.py
 ```
 
-### 配置
+### Configuration
 
-编辑 `config/hivemind_config.json`:
+Edit `config/hivemind_config.json`:
 
 ```json
 {
@@ -192,22 +194,22 @@ python examples/basic_hivemind.py
 
 ---
 
-## 📚 文档
+## 📚 Documentation
 
-- [技术方案](docs/HIVEMIND_NANOBOT_TECH_SPEC.md) - 完整架构设计
-- [深度对比分析](docs/DEEP_ANALYSIS_HIVE_VS_HIVEMIND.md) - 与 aden-hive 的详细对比
+- [Technical Specification](docs/HIVEMIND_NANOBOT_TECH_SPEC.md) (Chinese) - Full architecture design
+- [Deep Comparison Analysis](docs/DEEP_ANALYSIS_HIVE_VS_HIVEMIND.md) (Chinese) - Detailed comparison with aden-hive
 
 ---
 
-## 🤝 贡献
+## 🤝 Contributing
 
-欢迎 PR 和 Issue！
+PRs and Issues are welcome!
 
-### 当前优先级
+### Current Priorities
 
-1. 实现真实的 subagent 创建（桥接 nanobot API）
-2. LLM 驱动的 Librarian 分析
-3. 对话式 Agent 设计流程
+1. Implement real subagent creation (bridge nanobot API)
+2. LLM-driven Librarian analysis
+3. Conversational agent design workflow
 
 ---
 
@@ -217,27 +219,27 @@ MIT License
 
 ---
 
-## 🙏 致谢
+## 🙏 Acknowledgments
 
-### 核心依赖
+### Core Dependency
 
-- **[nanobot](https://github.com/HKUDS/nanobot) by HKUDS** - 提供轻量级（~4,000行）、多渠道（40+）的 Agent 基础框架。我们的三层母节点架构建立在 nanobot 的消息总线、subagent 管理和渠道集成之上，充分复用其 ClawHub Skill 生态。
+- **[nanobot](https://github.com/HKUDS/nanobot) by HKUDS** - Provides the lightweight (~4,000 lines), multi-channel (40+) agent foundation. Our three-layer mother node architecture is built on top of nanobot's message bus, subagent management, and channel integrations, fully leveraging its ClawHub Skill ecosystem.
 
-### 设计灵感
+### Design Inspiration
 
-- **[Hive](https://github.com/aden-hive/hive) by Aden** - 企业级 AI Agent 生产框架，其对话式 Agent 设计、动态图生成、自适应进化、Queen/Worker 协作模式等核心理念为我们的改进路线图提供了宝贵的启发。
+- **[Hive](https://github.com/aden-hive/hive) by Aden** - Enterprise-grade AI agent production framework. Its conversational agent design, dynamic graph generation, adaptive evolution, and Queen/Worker collaboration patterns have provided invaluable inspiration for our roadmap.
 
-### 生态支持
+### Ecosystem Support
 
-- **OpenClaw 社区** - 提供 Agent 开发工具链与最佳实践
+- **OpenClaw Community** - Provides agent development toolchain and best practices
 
 ---
 
-## 📞 联系
+## 📞 Contact
 
 - Issues: [GitHub Issues](https://github.com/hongyuatcufe/hivemind-nanobot/issues)
 - Discussions: [GitHub Discussions](https://github.com/hongyuatcufe/hivemind-nanobot/discussions)
 
 ---
 
-**项目状态**: 早期原型阶段，欢迎反馈与建议 🌱
+**Project Status**: Early prototype stage — feedback and suggestions welcome 🌱
