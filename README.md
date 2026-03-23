@@ -9,7 +9,9 @@
 
 ## 📖 项目简介
 
-HiveMind-nanobot 是一个轻量级的多 Agent 进化系统，在保留 [nanobot](https://github.com/HKUDS/nanobot) 框架（~4,000行）的轻量特性基础上，引入**三层母节点协作架构**，实现 Agent 的自我进化与知识积累。
+HiveMind-nanobot 是一个轻量级的多 Agent 进化系统，**基于 [nanobot](https://github.com/HKUDS/nanobot) 框架**（~4,000行）构建。我们在保留 nanobot 的轻量特性、40+ 渠道集成和 ClawHub Skill 生态的基础上，引入**三层母节点协作架构**，实现 Agent 的自我进化与知识积累。
+
+**设计理念**: 不是替代 nanobot，而是在其之上添加进化能力 —— 让 nanobot 从"单 Agent 框架"进化为"会自己设计和管理多 Agent 的系统"。
 
 ### 核心特性
 
@@ -86,13 +88,24 @@ HiveMind-nanobot 是一个轻量级的多 Agent 进化系统，在保留 [nanobo
 
 ### 设计灵感来源
 
-本项目的改进方向深度参考了 [aden-hive/hive](https://github.com/aden-hive/hive) 的优秀设计：
+本项目站在两个优秀开源项目的肩膀上：
 
-> **致谢**: 特别感谢 [Aden](https://github.com/aden-hive) 团队开源的 Hive 框架，其对话式 Agent 设计、动态图生成、自适应进化等核心理念为我们提供了宝贵的启发。Hive 是一个企业级的 AI Agent 生产框架，推荐所有 Agent 系统开发者学习参考。
+#### 基座框架：nanobot
 
-我们的改进计划借鉴了 Hive 的以下核心设计（详见 [深度对比分析](docs/DEEP_ANALYSIS_HIVE_VS_HIVEMIND.md)）：
+> **致谢**: 特别感谢 [HKUDS](https://github.com/HKUDS) 团队开源的 [nanobot](https://github.com/HKUDS/nanobot) 框架。nanobot 提供了轻量级（~4,000行）、高可扩展的 Agent 基础设施，支持 40+ 通信渠道和丰富的 ClawHub Skill 生态。我们的三层母节点架构正是在 nanobot 的基础上扩展而来，复用了其消息总线、subagent 管理、渠道集成等核心能力。
 
-1. **对话式 Agent 设计流程**（来自 Hive Queen）
+**从 nanobot 继承的核心能力**：
+- 40+ 渠道集成（Telegram, Discord, 飞书等）
+- ClawHub Skill 生态（浏览器控制、文件操作、API 调用）
+- 轻量级架构设计（易部署、低资源占用）
+- Subagent 生命周期管理
+
+#### 进化方向参考：Hive
+
+> **致谢**: 特别感谢 [Aden](https://github.com/aden-hive) 团队开源的 [Hive](https://github.com/aden-hive/hive) 框架。Hive 是企业级的 AI Agent 生产框架，其对话式 Agent 设计、动态图生成、自适应进化等核心理念为我们的改进方向提供了宝贵的启发。
+
+**借鉴 Hive 的核心设计**（详见 [深度对比分析](docs/DEEP_ANALYSIS_HIVE_VS_HIVEMIND.md)）：
+1. **对话式 Agent 设计流程**（来自 Hive Queen 节点）
 2. **LLM 驱动的失败分析与进化**（来自 Hive 自适应机制）
 3. **动态任务图生成**（来自 Hive GraphExecutor）
 
@@ -206,9 +219,17 @@ MIT License
 
 ## 🙏 致谢
 
-- **[nanobot](https://github.com/HKUDS/nanobot)** - 提供轻量级、多渠道的 Agent 基础框架
-- **[aden-hive/hive](https://github.com/aden-hive/hive)** - 提供企业级 Agent 设计灵感，包括对话式设计流程、动态图生成、自适应进化等核心理念
-- **OpenClaw 社区** - 提供 Agent 开发生态支持
+### 核心依赖
+
+- **[nanobot](https://github.com/HKUDS/nanobot) by HKUDS** - 提供轻量级（~4,000行）、多渠道（40+）的 Agent 基础框架。我们的三层母节点架构建立在 nanobot 的消息总线、subagent 管理和渠道集成之上，充分复用其 ClawHub Skill 生态。
+
+### 设计灵感
+
+- **[Hive](https://github.com/aden-hive/hive) by Aden** - 企业级 AI Agent 生产框架，其对话式 Agent 设计、动态图生成、自适应进化、Queen/Worker 协作模式等核心理念为我们的改进路线图提供了宝贵的启发。
+
+### 生态支持
+
+- **OpenClaw 社区** - 提供 Agent 开发工具链与最佳实践
 
 ---
 
